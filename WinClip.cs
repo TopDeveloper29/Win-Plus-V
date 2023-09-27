@@ -27,7 +27,14 @@ namespace WinV
         }
         public WinClip()
         {
-            hotkeyManager.RegisterHotkey(Keys.V, KeyModifiers.Control | KeyModifiers.Alt);
+            try
+            {
+                hotkeyManager.RegisterHotkey(Keys.V, KeyModifiers.Win);
+            }
+            catch
+            {
+                hotkeyManager.RegisterHotkey(Keys.V, KeyModifiers.Control | KeyModifiers.Alt);
+            }
             hotkeyManager.HotkeyPressed += HotkeyManager_HotkeyPressed;
             obci.CollectionChanged += Obci_CollectionChanged;
             InitializeComponent();
@@ -116,6 +123,7 @@ namespace WinV
                     Clipboard.SetText(item.Value.ToString());
                 }
                 this.Hide();
+                SendKeys.Send("^{v}");
             }
         }
 
