@@ -1,0 +1,5 @@
+RegisterHotKey
+SetWindowLongPtr
+CallWindowProc
+SetForegroundWindow
+BringWindowToTop

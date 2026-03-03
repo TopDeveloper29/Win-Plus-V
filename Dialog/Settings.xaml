@@ -1,0 +1,29 @@
+﻿<ContentDialog
+    x:Class="Win_Plus_V.Dialog.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Win_Plus_V.Dialog"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{ThemeResource DefaultContentDialogStyle}"
+    Background="#EF282828"
+    Title="Settings"
+    PrimaryButtonText="Save"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="Save_Click"
+    SecondaryButtonClick="Cancel_Click">
+
+    <ContentDialog.Resources>
+        <x:Double x:Key="ContentDialogMaxWidth">9999</x:Double>
+    </ContentDialog.Resources>
+
+
+    <StackPanel Margin="0,10" Spacing="20" Orientation="Horizontal" HorizontalAlignment="Left">
+
+        <ComboBox x:Name="ThemeComboBox" Header="Application theme:" VerticalAlignment="Top" Margin="0,3" MinWidth="170">
+            <ComboBoxItem Content="Solid"/>
+            <ComboBoxItem Content="Desktop Translucent"/>
+            <ComboBoxItem Content="Translucent"/>
+        </ComboBox>
+        <ToggleSwitch x:Name="CacheItem" OnContent="Cache clipboard item" OffContent="Do not cache clipboard item" VerticalAlignment="Bottom"/>
+    </StackPanel>
+</ContentDialog>

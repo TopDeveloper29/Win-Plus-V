@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Win-Plus-V (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Win-Plus-V (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

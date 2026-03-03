@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Win_Plus_V.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Win_Plus_V"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Win-Plus-V">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid x:Name="MainGrid" x:FieldModifier="Public">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="TitleBar" Margin="20,4,0,0">
+            <TextBlock Text="Clipboard"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontWeight="Light"/>
+            <Button x:Name="MinimizeButtton" Content="__" Background="Transparent" BorderThickness="0" Padding="10,0,10,15" 
+                    HorizontalAlignment="Right" Margin="4,0" Click="MinimizeButtton_Click" IsTabStop="False"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid VerticalAlignment="Top" Padding="20,10">
+                <Button x:Name="SettingsButton" HorizontalAlignment="Left"  Padding="10,6" BorderThickness="0" Click="SettingsButton_Click">
+                    <StackPanel Spacing="10" Orientation="Horizontal">
+                        <FontIcon Glyph="&#xE713;" FontWeight="Light" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock Text="Settings" FontWeight="Light" VerticalAlignment="Center" Margin="0,0,0,2"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="ClearAllButton" HorizontalAlignment="Right"  Padding="10,6" BorderThickness="0" Click="ClearAllButton_Click">
+                    <StackPanel Spacing="10" Orientation="Horizontal">
+                        <FontIcon Glyph="&#xEA99;" FontWeight="Light" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock Text="Clear all" FontWeight="Light" VerticalAlignment="Center" Margin="0,0,0,2"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <ListView x:Name="ItemsList" IsTabStop="False" Grid.Row="1" Margin="8,5" SelectionMode="None" ItemsSource="{x:Bind Items}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ClipboardItem">
+                        <Grid Margin="0,6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Text="{x:Bind Timestamp}" Opacity="0.6" Margin="2,5"/>
+                            <Button x:Name="CopyButton" Padding="0" BorderBrush="Transparent" HorizontalAlignment="Stretch" Grid.Row="1" Height="80" Click="CopyButton_Click">
+                                <Grid ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{x:Bind Text, Mode=OneWay}" Margin="10,0" HorizontalAlignment="Left" MinWidth="500" Visibility="{x:Bind TextVisible, Mode=OneWay}"/>
+                                    <Image Source="{x:Bind Image, Mode=OneWay}" Margin="10,0" HorizontalAlignment="Left" MinWidth="500" Visibility="{x:Bind ImageVisible, Mode=OneWay}"/>
+
+
+                                    <Button x:Name="MoreButton" Background="Transparent" BorderThickness="0" IsHoldingEnabled="False" Padding="5" Margin="10,0" Grid.Column="1" Click="MoreButton_Click">
+                                        <FontIcon Glyph="&#xE712;" />
+                                        <Button.Flyout>
+                                            <MenuFlyout x:Name="MoreFlyout">
+                                                <MenuFlyoutItem x:Name="CopyItemButton" Text="Copy" Icon="Copy" Click="CopyItemButton_Click"/>
+                                                <MenuFlyoutItem x:Name="DeleteItemButton" Text="Delete" Icon="Delete" Click="DeleteItemButton_Click"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
+                                    </Button>
+                                </Grid>
+                            </Button>
+                        </Grid>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Window>
