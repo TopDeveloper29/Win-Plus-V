@@ -10,4 +10,7 @@
     <Platform Solution="*|x86" Project="x86" />
     <Deploy />
   </Project>
+  <Project Path="Win-Plus-V_Setup/Win-Plus-V_Setup.vdproj" Type="Installer">
+    <Build />
+  </Project>
 </Solution>

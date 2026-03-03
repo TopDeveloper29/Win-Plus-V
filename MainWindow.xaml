@@ -32,13 +32,13 @@
             </Grid.RowDefinitions>
             
             <Grid VerticalAlignment="Top" Padding="20,10">
-                <Button x:Name="SettingsButton" HorizontalAlignment="Left"  Padding="10,6" BorderThickness="0" Click="SettingsButton_Click">
+                <Button x:Name="SettingsButton" HorizontalAlignment="Left" IsTabStop="False"  Padding="10,6" BorderThickness="0" Click="SettingsButton_Click">
                     <StackPanel Spacing="10" Orientation="Horizontal">
                         <FontIcon Glyph="&#xE713;" FontWeight="Light" FontSize="16" VerticalAlignment="Center"/>
                         <TextBlock Text="Settings" FontWeight="Light" VerticalAlignment="Center" Margin="0,0,0,2"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="ClearAllButton" HorizontalAlignment="Right"  Padding="10,6" BorderThickness="0" Click="ClearAllButton_Click">
+                <Button x:Name="ClearAllButton" HorizontalAlignment="Right" IsTabStop="False" Padding="10,6" BorderThickness="0" Click="ClearAllButton_Click">
                     <StackPanel Spacing="10" Orientation="Horizontal">
                         <FontIcon Glyph="&#xEA99;" FontWeight="Light" FontSize="16" VerticalAlignment="Center"/>
                         <TextBlock Text="Clear all" FontWeight="Light" VerticalAlignment="Center" Margin="0,0,0,2"/>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -18,6 +19,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics;
 using Windows.UI;
+using WinRT.Interop;
 
 
 namespace Win_Plus_V;
@@ -54,12 +56,32 @@ public partial class App : Application
             op.IsResizable = false;
         }
 
+        HideFromTaskbar();
+
 #if DEBUG
         _window.Activate();
 #endif
 
     }
 
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+    private const int GWL_EXSTYLE = -20;
+    private const int WS_EX_TOOLWINDOW = 0x00000080; private void HideFromTaskbar()
+    {
+        // Get the window handle
+        IntPtr hWnd = WindowNative.GetWindowHandle(MainWindow.Current);
+
+        // Get the current extended style
+        int extendedStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
+
+        // Set the new extended style by adding WS_EX_TOOLWINDOW
+        SetWindowLong(hWnd, GWL_EXSTYLE, extendedStyle | WS_EX_TOOLWINDOW);
+    }
     public static void ResizeRelativeToScreen(AppWindow AppWindow, double widthRatio, double heightRatio)
     {
         if (Current == null)
